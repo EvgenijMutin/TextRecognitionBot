@@ -1,6 +1,5 @@
 import telebot
 import Recognition.TextFromImageRecognition
-import Recognition.AudioFileRecognition
 
 token = ''
 tokenRead = open('token.txt', 'r')
