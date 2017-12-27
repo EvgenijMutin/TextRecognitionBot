@@ -1,18 +1,19 @@
 import telebot
 import Recognition.TextFromImageRecognition
+import Recognition.AudioFileRecognition
 
 token = ''
 tokenRead = open('token.txt', 'r')
 for line in tokenRead:
     token = token + line
-print(token)
 
 bot = telebot.TeleBot(token)
+print('bot is active')
 
 
 @bot.message_handler(commands=['help'])
 def handle_text(message):
-    answer = "send me png file with text"
+    answer = "send me image file with text"
     bot.send_message(message.chat.id, answer)
 
 
@@ -35,7 +36,7 @@ def handle_docs_photo(message):
             new_file.write(downloaded_file)
 
         answer = Recognition.TextFromImageRecognition.textFromImageRecognition(src)
-        bot.reply_to(message, "Ваш текст: " + answer)
+        bot.reply_to(message, "Your Text: " + answer)
 
     except Exception as e:
         bot.reply_to(message, e)
@@ -53,7 +54,7 @@ def handle_photo(message):
             new_file.write(downloaded_file)
 
         answer = Recognition.TextFromImageRecognition.textFromImageRecognition(src)
-        bot.reply_to(message, "Ваш текст: " + answer)
+        bot.reply_to(message, "Your Text: " + answer)
     except Exception as e:
         bot.reply_to(message, e)
 
